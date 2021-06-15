@@ -13,7 +13,7 @@ GitHub Action to run docker command on the remote Docker host by creating Docker
     ssh_host_key: ${{ secrets.DOCKER_HOST_SSH_HOST_KEY }}
     ssh_private_key: ${{ secrets.DOCKER_HOST_SSH_PRIVATE_KEY }}
     docker_host: my-docker-host.com
-    docker_command: images ls
+    docker_command: image ls
 ```
 
 ### Deploy to remote Docker Swarm
