@@ -1,0 +1,35 @@
+name: 'Docker run command remote host'
+description: 'Run docker command on the remote Docker host by creating Docker context using SSH connection'
+branding:
+  icon: 'anchor'
+  color: 'blue'
+
+inputs:
+  ssh_host_key:
+    description: 'SSH host key of Docker host'
+    required: true
+  ssh_private_key:
+    description: 'SSH private key of Docker host'
+    required: true
+  docker_host:
+    description: 'Domain or IP to the remote Docker engine'
+    required: true
+  docker_user:
+    description: 'User account on Docker host'
+    required: false
+    default: 'root'
+  docker_command:
+    description: 'Docker command with options'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - run: ${{ github.action_path }}/entrypoint.sh
+      shell: bash
+      env:
+        INPUT_SSH_HOST_KEY: ${{ inputs.ssh_host_key }}
+        INPUT_SSH_PRIVATE_KEY: ${{ inputs.ssh_private_key }}
+        INPUT_DOCKER_HOST: ${{ inputs.docker_host }}
+        INPUT_DOCKER_USER: ${{ inputs.docker_user }}
+        INPUT_DOCKER_COMMAND: ${{ inputs.docker_command }}
